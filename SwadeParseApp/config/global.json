@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Swade": {
+            "applicationId": "J8nmO0Ykh1Cv4mrBsZewNuadAKrwn4s42SxPJg8y", 
+            "masterKey": "mhBsw0jBjnOdgpi75pp7MuePRXHy3aEhM8MIMUw9"
+        }, 
+        "_default": {
+            "link": "Swade"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.2"
+    }
+}
