@@ -14,3 +14,6 @@
 # Ignore all logfiles and tempfiles.
 /swade_on_rails/log/*.log
 /swade_on_rails/tmp
+
+# For Mac development.
+*.DS_Store
