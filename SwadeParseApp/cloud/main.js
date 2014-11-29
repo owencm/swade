@@ -1,6 +1,4 @@
-Parse.Cloud.job("cloneJob", function(request, status) {
-	
-}var rootURL = 'http://www.matchesfashion.com/mens/shop/';
+var rootURL = 'http://www.matchesfashion.com/mens/shop/';
 var queryURL = '?type=&orderby=&pagesize=240';
 
 var categories = [
@@ -75,3 +73,23 @@ var categories = [
 		]
 	}
 ];
+
+Parse.Cloud.job("scrapeJob", function(request, status) {
+	Parse.Cloud.useMasterKey();
+
+	console.log("Beginning scrape job");
+
+	for (var categoryIndex in categories) {
+		var category = categories[categoryIndex];
+		var categoryName = category.name;
+		console.log("Scraping category: " + category.name);
+
+		for (var subCategoryIndex in category.subCategories) {
+			subCategoryName = category.subCategories[subCategoryIndex];
+			console.log("Scraping category: " + categoryName + " sub-category: " + subCategoryName);
+
+		}
+	}
+
+	status.success('Scraping done.');
+});
