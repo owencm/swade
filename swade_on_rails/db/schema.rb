@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20141129231451) do
 
   create_table "products", force: true do |t|
     t.string   "name",                                     null: false
+    t.string   "color",                                    null: false
     t.string   "features",                                 null: false
     t.string   "designer",                                 null: false
     t.decimal  "price",          precision: 30, scale: 10, null: false
