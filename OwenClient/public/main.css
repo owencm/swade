@@ -76,7 +76,7 @@ header #backButton {
 
 footer {
 	color: white;
-	background-color: rgba(0,0,0,.95);
+	background-color: rgba(0,0,0,1);
 	height: 40px;
 	padding: 12px;
 	position: fixed;
