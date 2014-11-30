@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     get 'sessions/new' => 'sessions#new'
     
     post 'products/create' => 'products#create'
+    
+    get 'products/index' => 'products#index'
+    
+    get 'products/like' => 'products#like'
   end
 
   # Example of regular route:
