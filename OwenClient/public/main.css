@@ -27,10 +27,10 @@ body {
 }
 
 header {
-	background-color: rgba(0,0,0,.85);
+	background-color: rgba(37,37,37,.89);
 	height: 56px;
 	padding: 18px;
-	box-shadow: 0 1px 3px rgba(0,0,0,.26);
+	box-shadow: 0 1px 3px rgba(37,37,37,.26);
 	position: fixed;
 	width: 100%;
 	z-index: 300;
@@ -62,7 +62,7 @@ header #backButton {
 }
 
 #toast {
-	background: rgba(0,0,0,0.9);
+	background: rgba(37,37,37,0.9);
 	padding: 15px;
 	margin: 0 auto;
 	color: white;
@@ -76,9 +76,7 @@ header #backButton {
 
 footer {
 	color: white;
-	background-color: rgba(0,0,0,.95);
-	height: 40px;
-	padding: 12px;
+	background-color: rgba(37,37,37,.95);
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -91,19 +89,72 @@ footer {
 footer #filterIcon {
 	width: 20px;
 	position: relative;
-	top: -3px;
+	top: 5px;
 }
 
 footer .filter {
-	display: inline-block;
-	position: relative;
-	top: -7px;
-	margin: 0 0 0 20px;
-	font-size: 0.9em;
+display: inline-block;
+position: relative;
+font-size: 0.9em;
+padding: 12px;
 }
 
 footer .filtersContainer {
 	margin: 0 auto;
+}
+
+/* Filter dropdowns (or ups even, trololol) */
+.filtersContainer { 
+    margin-top: 300px;
+}
+.filtersContainer .filter:hover {
+	background: rgba(236, 240, 241,0.3);
+}
+.filtersContainer .filter ul li:hover { 
+    background: rgba(236, 240, 241,0.3);
+}
+.filtersContainer .filter ul {
+	background-color: rgba(37,37,37,.95);
+}
+.filtersContainer .filter ul li {
+    border: none; 
+    padding: 15px 0 ;
+    width: 140px; 
+}
+.filtersContainer .filter ul li a { 
+ 	color: #fff;
+ 	font-size: 0.9em;
+ 	text-decoration: none;
+ 	font-weight: 300;
+    padding: 10px; 
+}
+.filtersContainer li { 
+    position:relative; 
+    float:left;
+}
+.filtersContainer .filter ul, .filtersContainer:hover .filter ul, .filtersContainer:hover .filter:hover ul li ul{ 
+    display:none;
+    position: absolute;
+    left: 0;
+    bottom: -40px;
+    list-style-type:none; 
+    width: 140px;
+}
+.filtersContainer:hover ul, .filtersContainer:hover .filter:hover ul, .filtersContainer:hover .filter:hover ul li:hover ul { 
+    display:block;
+}
+.filtersContainer:hover .filter:hover ul li:hover ul { 
+    position: absolute;
+    margin-left: 140px;
+    margin-top: -28px;
+    font: 10px;}
+.filtersContainer:hover .filter:hover ul { 
+    position: absolute;
+    margin-top: 1px;
+    font: 10px;
+}
+.filtersContainer>.filter:hover>ul { 
+    bottom:100%;
 }
 
 div#listContainer {
@@ -126,7 +177,7 @@ div#detailContainer .thumb {
 	display: block;
 	max-width: 80%;
 	max-height: 40%;
-	border: 5px solid rgba(0,0,0,0.8);
+	border: 5px solid rgba(37,37,37,0.8);
 }
 
 div#detailContainer h2 {
@@ -153,7 +204,7 @@ section.card {
 	box-sizing: border-box;
 	width: 150px;
 	margin: 10px;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 2px 5px rgba(37, 37, 37, 0.2);
 	color: #444;
 	line-height: 1.5em;
 	background-color: #fafafa;
@@ -262,5 +313,5 @@ div#addbutton {
 	background-repeat: no-repeat;
 	background-size: 16px;
 	background-color: #eeff41;
-	box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+	box-shadow: 0px 2px 5px rgba(37, 37, 37,0.3);
 }
