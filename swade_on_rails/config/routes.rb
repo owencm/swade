@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   root 'products#index'
   
   get 'products' => 'products#index', as: :products
+  
+  namespace :api, defaults: { format: :json } do
+    get 'categories' => 'categories#index'
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
