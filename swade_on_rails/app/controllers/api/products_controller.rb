@@ -83,7 +83,9 @@ class Api::ProductsController < Api::ApiController
         if remaining_items > 0
           product_hash = {
             id: candidate.id,
-            name: candidate.name
+            name: candidate.name,
+            image_uri: candidate.image_uri,
+            price: candidate.price
           }
           
           first_roll = rand(10)
