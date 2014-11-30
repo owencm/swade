@@ -77,6 +77,38 @@ var categories = [
 
 var Product = Parse.Object.extend('Product');
 
+Parse.Cloud.job("migrateToRuby", function(request, status) {
+	var query = new Parse.Query('Product');
+
+	query.each(function (product) {
+		if (product.get("category") == "shop/blazers") {
+			product.set("category", "blazers");
+		}
+
+		return Parse.Cloud.httpRequest({
+			url: "https://vvv.pagekite.me/api/products/create",
+			method: 'POST',
+			params: {
+				name 	: product.get("title"),
+				color 	: product.get("colour"),
+				designer: product.get("designer"),
+				price 	: product.get("price"),
+				category: product.get("category"),
+				subcategory: product.get("subCategory"),
+				image_uri : product.get("imageURLs")[0]
+			}
+		});
+	})
+	.then(
+		function() {
+			status.success("Product clone done");
+		},
+		function() {
+			status.error("Error occured during product clone.");
+		}
+	);
+});
+
 Parse.Cloud.job("pageScrapeJob", function(request, status) {
 	Parse.Cloud.useMasterKey();
 
