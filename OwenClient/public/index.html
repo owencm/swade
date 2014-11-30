@@ -12,16 +12,22 @@
 <body>
 	<header>
 		<h1>Swade</h1>
+		<img src='back-icon.svg' id='backButton' style='display: none'></img>
 	</header>
-	<div id='container'></div>
+	<div id='listContainer'></div>
+	<div id='detailContainer' style='display: none'></div>
+	<div id='toastContainer'>
+		<div id='toast'>Adjusting to your taste...</div>
+	</div>
 	<div class='clear'></div>
 	<footer>
-		Hi
+		<div class='filtersContainer'>
+			<img src='filter.png' id='filterIcon'></img><div class='filter'>PRICE</div><div class='filter'>CATEGORY</div><div class='filter'>COLOR</div><div class='filter'>SIZE</div>
+		</div>
 	</footer>
 	<script id='cardTemplate' type='text/x-handlebars-template'>
-		<section class='card ' id='item{{id}}'>
+		<section class='card' id='item{{id}}'>
 			<div class='thumbContainer'>
-				<div class='heart'></div>
 				<img class='thumb' src='{{thumbnail}}'></img>
 				<div class='redHeart'></div>
 			</div>
@@ -29,6 +35,14 @@
 				<h2>{{title}}</h2>
 			</div>
 		</section>
+    </script>
+ 	<script id='detailTemplate' type='text/x-handlebars-template'>
+		<img class='thumb' src='{{thumbnail}}'></img>
+		<div class='metaContainer'>
+			<h2>{{title}}</h2>
+			<p class='description'>This is the description lorem ipsum dolar sit amet dolar sit amit is the best.</p>
+			<div class='buyButton'>&#163;89.99</div>
+		</div>
     </script>
 
     <script type='text/javascript' src='handlebars-v1.3.0.js'></script>
