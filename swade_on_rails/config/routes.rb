@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     get 'categories' => 'categories#index'
+    
+    get 'subcategories' => 'subcategories#index'
   end
 
   # Example of regular route:
