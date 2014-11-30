@@ -85,6 +85,7 @@ var view = (function (model) {
         history.pushState({mode: MODE.detail}, 'SWADE');
         console.log('pushing history');
       }
+      window.scrollTo(0, 0);
     }
     if (newMode == MODE.list) {
       listContainerElem.style.display = '';
@@ -107,8 +108,13 @@ var view = (function (model) {
     var docViewTop = window.scrollY;
     var docViewBottom = docViewTop + window.innerHeight;
     var elemTop = bottomElem.offsetTop;
+    var elemLeft = bottomElem.offsetLeft;
+    if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 321) {
+      elemLeft = 111;
+    }
     // console.log('item ' + model.getBottomItemId() +' top is '+elemTop +', compared to '+docViewBottom);
-    return (elemTop < docViewBottom);
+    // Elem left hack to ensure we never have a row of just one
+    return (elemTop < docViewBottom || elemLeft < 110);
   };
 
   var insertItemIntoContainer = function (item) {
@@ -157,7 +163,6 @@ var view = (function (model) {
   }
 
   var drawMoreItemsIfNeeded = function () {
-    console.log('mode is '+mode);
     if (mode == MODE.list) {
       var items = model.getItems();
       var i = model.getBottomItemId() + 1;
@@ -168,6 +173,7 @@ var view = (function (model) {
         model.setBottomItemId(i);
         i++;
       }
+      console.log(items.length +' items total, '+i +' on screen.');
       if (i + 5 > items.length) {
         console.log('not much content left, get some more');
         network.getMoreItemsFromServer(false);
@@ -199,6 +205,11 @@ var view = (function (model) {
     backButtonElem.addEventListener('click', function () {
       changeMode(MODE.list, true);
     });
+
+    var buyButtonElem = document.querySelector('.buyButton');
+    buyButtonElem.addEventListener('click', function () {
+      window.open('http://www.asos.com/ASOS-Black/ASOS-BLACK-Crop-Top-with-Gem-Collar/Prod/pgeproduct.aspx?iid=4479086&cid=19632&sh=0&pge=0&pgesize=36&sort=-1&clr=Silver+holographic&totalstyles=422&gridsize=3');
+    });
   }
 
   window.addEventListener('popstate', function(e) {
@@ -223,13 +234,15 @@ var view = (function (model) {
       }
       setTimeout(function () {
         handledScrollRecently = false;
-      }, 50);
+      }, 10);
       drawMoreItemsIfNeeded();
     }
   };
   window.addEventListener('scroll', handleScroll);
+  window.addEventListener('touchmove', handleScroll);
+  window.addEventListener('gesturechange', handleScroll);
 
-  window.setInterval(drawMoreItemsIfNeeded, 1000);
+  window.setInterval(drawMoreItemsIfNeeded, 300);
 
   model.addListener(redrawItems);
 
@@ -241,6 +254,8 @@ var view = (function (model) {
 })(model);
 
 var network = (function (model) {
+  var token = 'ad8ck8ISRU4rRceP4m1eJg';
+
   var getItemsFromServer = function () {
     var req = new XMLHttpRequest();
     req.onload = function () {
@@ -273,25 +288,49 @@ var network = (function (model) {
     req.send({item: itemId});   
   }
 
+  var requestPending = false;
   var getMoreItemsFromServer = function (replaceMode) {
+    if (!requestPending) {
+      requestPending = true;
+      var req = new XMLHttpRequest();
+      req.onload = function () {
+        requestPending = false;
+        if(req.status >= 200 && req.status < 400) {
+          // These are the new items sent to us by the server
+          model.addItems(JSON.parse(this.responseText));
+        } else {
+          // Request failed
+          throw ('Request failed');
+        }
+      }
+      req.open('get', 'items.json', true);
+      req.setRequestHeader('Content-type', 'application/json');
+      req.send();
+    }
+  }
+
+  var getNewSession = function () {
     var req = new XMLHttpRequest();
     req.onload = function () {
       if(req.status >= 200 && req.status < 400) {
-        // These are the new items sent to us by the server
-        model.addItems(JSON.parse(this.responseText));
+        token = (JSON.parse(this.responseText));
+        alert(token);
       } else {
         // Request failed
         throw ('Request failed');
       }
     }
-    req.open('get', 'items.json', true);
-    req.setRequestHeader('Content-type', 'application/json');
+    getItemsFromServer(); // Do this in success above
+    req.open('get', 'http://vvv.pagekite.me/api/sessions/new', true);
+    // req.setRequestHeader('Content-type', 'application/json');
     req.send();
   }
 
   return {getItemsFromServer: getItemsFromServer,
           requestUserLikedItem: requestUserLikedItem,
-          getMoreItemsFromServer: getMoreItemsFromServer}
+          getMoreItemsFromServer: getMoreItemsFromServer,
+          getNewSession: getNewSession}
 })(model);
 
-network.getItemsFromServer();
+
+network.getNewSession();
