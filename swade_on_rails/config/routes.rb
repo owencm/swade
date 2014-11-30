@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get 'subcategories' => 'subcategories#index'
     
     get 'sessions/new' => 'sessions#new'
+    
+    post 'products/create' => 'products#create'
   end
 
   # Example of regular route:
