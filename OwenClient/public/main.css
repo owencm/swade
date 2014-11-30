@@ -10,7 +10,7 @@ body {
 	background-color: #eee;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
-	overflow: auto;
+    text-align: center;
 }
 
 .clear {
@@ -53,53 +53,116 @@ header #backButton {
 	padding: 18px;
 }
 
+#toastContainer {
+	position: fixed;
+	bottom: 60px;
+	width: 100%;
+	z-index: 400;
+	pointer-events: none;
+}
+
+#toast {
+	background: rgba(0,0,0,0.9);
+	padding: 15px;
+	margin: 0 auto;
+	color: white;
+	border-radius:25px;
+	width: 200px;
+	text-align: center;
+	font-size: 0.9em;
+	transition: all 1s;
+	opacity: 0;
+}
+
 footer {
-	background-color: rgba(0,0,0,.85);
+	color: white;
+	background-color: rgba(0,0,0,.95);
 	height: 40px;
-	padding: 18px;
+	padding: 12px;
 	position: fixed;
 	bottom: 0;
 	width: 100%;
 	z-index: 250;
 	box-sizing: border-box;
-	transform: translateZ(0);	
+	transform: translateZ(0);
+	text-align: center;
 }
 
-div#container {
+footer #filterIcon {
+	width: 20px;
+	position: relative;
+	top: -3px;
+}
+
+footer .filter {
+	display: inline-block;
+	position: relative;
+	top: -7px;
+	margin: 0 0 0 20px;
+	font-size: 0.9em;
+}
+
+footer .filtersContainer {
+	margin: 0 auto;
+}
+
+div#listContainer {
     position: absolute;
     top: 56px;
     padding: 10px 10px 100px 10px;
+    text-align: center;
+}
+
+div#detailContainer {
+	position: absolute;
+    top: 56px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+div#detailContainer .thumb {
+	margin: 0px auto 20px auto;
+	display: block;
+	max-width: 80%;
+	max-height: 40%;
+	border: 5px solid rgba(0,0,0,0.8);
+}
+
+div#detailContainer h2 {
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+}
+
+div#detailContainer .description {
+	margin-top: 20px;
+}
+
+div#detailContainer .buyButton {
+	border: 1px solid black;
+	width: 80px;
+	text-align: center;
+	margin: 20px auto;
+	padding: 15px;
+	border-radius: 4px;
 }
 
 section.card {
 	/* This puts the border inside the edge */
 	box-sizing: border-box;
-	width: 250px;
+	width: 150px;
 	margin: 10px;
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 	color: #444;
 	line-height: 1.5em;
 	background-color: #fafafa;
-	float: left;
+	display: inline-block;
 }
 
 section.card .thumbContainer {
 	position: relative;
 	transition: all 0.1s;
-	background-color: black;
-}
-
-section.card .thumbContainer .heart {
-	position: absolute;
-	bottom: 14px;
-	left: 11px;
-	width: 40px;
-	height: 40px;
-	background-image: url('heart.png');
-	background-position: 5% 95%;
-	background-repeat: no-repeat;
-	background-size: 20px;
-	z-index: 100;
 }
 
 section.card .thumbContainer img {
@@ -119,22 +182,18 @@ section.card .thumbContainer .redHeart {
 	background-repeat: no-repeat;
 	background-size: 20px;
 	z-index: 250;
+	pointer-events: none;
+	transition: all 0.5s;
 }
 
-section.card.selected .thumbContainer .redHeart {
+section.card .thumbContainer.liked .redHeart {
 	opacity: 1;
-}
-
-section.card .thumbContainer.liked {
-	background-image: url('redheart.png');
+	transform: scaleZ(1.5);
 }
 
 section.card .thumbContainer .thumb {
-	width: 250px;
-}
-
-section.card .thumbContainer:active .thumb {
-	opacity: 0.7;	
+	width: 150px;
+	min-height: 150px;
 }
 
 section.card .metaContainer {
@@ -178,13 +237,13 @@ section.card .optionContainer .option.disabled {
 	color: #CCC;
 }
 
-section.card.detail {
+section.card {
 	-webkit-animation: fadeIn 0.5s;
 }
 
 @-webkit-keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 
 b {
