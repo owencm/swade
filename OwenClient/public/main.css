@@ -33,8 +33,9 @@ header {
 	box-shadow: 0 1px 3px rgba(0,0,0,.26);
 	position: fixed;
 	width: 100%;
-	z-index: 1;
+	z-index: 300;
 	box-sizing: border-box;
+	transform: translateZ(0);
 }
 
 header h1 {
@@ -52,14 +53,22 @@ header #backButton {
 	padding: 18px;
 }
 
+footer {
+	background-color: rgba(0,0,0,.85);
+	height: 40px;
+	padding: 18px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 250;
+	box-sizing: border-box;
+	transform: translateZ(0);	
+}
+
 div#container {
     position: absolute;
     top: 56px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    overflow-y: visible;
-    padding: 10px;
+    padding: 10px 10px 100px 10px;
 }
 
 section.card {
@@ -75,20 +84,57 @@ section.card {
 }
 
 section.card .thumbContainer {
+	position: relative;
+	transition: all 0.1s;
 	background-color: black;
+}
+
+section.card .thumbContainer .heart {
+	position: absolute;
+	bottom: 14px;
+	left: 11px;
+	width: 40px;
+	height: 40px;
 	background-image: url('heart.png');
 	background-position: 5% 95%;
 	background-repeat: no-repeat;
 	background-size: 20px;
+	z-index: 100;
 }
 
-section.card .thumb {
+section.card .thumbContainer img {
+	z-index: 200;
+	position: relative;
+}
+
+section.card .thumbContainer .redHeart {
+	position: absolute;
+	bottom: 14px;
+	left: 11px;
+	width: 40px;
+	height: 40px;
+	opacity: 0;
+	background-image: url('redheart.png');
+	background-position: 5% 95%;
+	background-repeat: no-repeat;
+	background-size: 20px;
+	z-index: 250;
+}
+
+section.card.selected .thumbContainer .redHeart {
+	opacity: 1;
+}
+
+section.card .thumbContainer.liked {
+	background-image: url('redheart.png');
+}
+
+section.card .thumbContainer .thumb {
 	width: 250px;
 }
 
-section.card .thumb:hover {
-	transition: all 0.1s;
-	opacity: 0.7;
+section.card .thumbContainer:active .thumb {
+	opacity: 0.7;	
 }
 
 section.card .metaContainer {
