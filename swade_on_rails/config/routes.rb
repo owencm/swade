@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get 'categories' => 'categories#index'
     
     get 'subcategories' => 'subcategories#index'
+    
+    get 'sessions/new' => 'sessions#new'
   end
 
   # Example of regular route:
