@@ -7,15 +7,15 @@ var model = (function () {
     listeners.map(function (listener) {
       listener();
     });
-  }
+  };
   var items = [];
   var setItems = function (newItems) {
     items = newItems;
     changed();
-  }
+  };
   var getItems = function () {
     return items;
-  }
+  };
 
   return {setItems: setItems,
           getItems: getItems,
@@ -23,8 +23,11 @@ var model = (function () {
 })();
 
 var view = (function (model) {
+  // This is the container which contains the cards
+  var containerElem = document.querySelector('#container');
   // This is the ID of the lowest item shown on the page
   var bottomItemId;
+
   var isSpaceForMore = function () {
     if (bottomItemId == undefined) {
       return true;
@@ -33,11 +36,20 @@ var view = (function (model) {
     var docViewTop = window.scrollY;
     var docViewBottom = docViewTop + window.innerHeight;
     var elemTop = bottomElem.offsetTop;
+    console.log(elemTop +', compared to '+docViewBottom);
     return (elemTop < docViewBottom);
+  };
+
+  var insertItemIntoContainer = function (item) {
+    var source = document.querySelector('#cardTemplate').innerHTML;
+    var template = Handlebars.compile(source);
+    var newHTML = template(item);
+    var newElem = document.createElement('div');
+    newElem.innerHTML = newHTML;
+    containerElem.appendChild(newElem.children[0]);
   }
 
   var redrawItems = function () {
-    var containerElem = document.querySelector('#container');
     // Empty the container so we can fill it again
     containerElem.innerHTML = '';
     var items = model.getItems();
@@ -46,16 +58,37 @@ var view = (function (model) {
     while (i < items.length && isSpaceForMore()) {
       var item = items[i];
       item.id = i;
-      var source = document.querySelector('#cardTemplate').innerHTML;
-      var template = Handlebars.compile(source);
-      var newHTML = template(item);
-      var newElem = document.createElement('div');
-      newElem.innerHTML = newHTML;
-      containerElem.appendChild(newElem);
+      insertItemIntoContainer(item);
+      bottomItemId = i;
+      i++;
+    };
+  }
+
+  var drawMoreItemsIfNeeded = function () {
+    var items = model.getItems();
+    var i = bottomItemId + 1;
+    while (i < items.length && isSpaceForMore()) {
+      var item = items[i];
+      item.id = i;
+      insertItemIntoContainer(item);
       bottomItemId = i;
       i++;
     }
   }
+
+  var handledScrollRecently = false;
+  // Instead of checking and redrawing everything frequently we only do this every 200ms while scrolling
+  var handleScroll = function () {
+    if (!handledScrollRecently) {
+      handledScrollRecently = true;
+      setTimeout(function () {
+        handledScrollRecently = false;
+      }, 200);
+      drawMoreItemsIfNeeded();
+    }
+  };
+  window.addEventListener('scroll', handleScroll);
+
   model.addListener(redrawItems);
 })(model);
 

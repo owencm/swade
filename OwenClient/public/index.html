@@ -13,13 +13,17 @@
 	<header>
 		<h1>Swade</h1>
 	</header>
-	<div id='container'>
-
-	</div>
+	<div id='container'></div>
+	<div class='clear'></div>
+	<footer>
+		Hi
+	</footer>
 	<script id='cardTemplate' type='text/x-handlebars-template'>
-		<section class='card' id='item{{id}}'>
+		<section class='card ' id='item{{id}}'>
 			<div class='thumbContainer'>
+				<div class='heart'></div>
 				<img class='thumb' src='{{thumbnail}}'></img>
+				<div class='redHeart'></div>
 			</div>
 			<div class='metaContainer'>
 				<h2>{{title}}</h2>
