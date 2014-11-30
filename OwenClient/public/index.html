@@ -22,7 +22,114 @@
 	<div class='clear'></div>
 	<footer>
 		<div class='filtersContainer'>
-			<img src='filter.png' id='filterIcon'></img><div class='filter'>PRICE</div><div class='filter'>CATEGORY</div><div class='filter'>COLOR</div><div class='filter'>SIZE</div>
+			<img src='filter.png' id='filterIcon'></img>
+			<div class='filter' id="price">PRICE
+				<ul>
+                    <li><a id="">0-100</a></li>
+                    <li><a id="">100-200</a></li>
+                    <li><a id="">200-300</a></li>
+                    <li><a id="">300-500</a></li>
+                    <li><a id="">500-1000</a></li>
+                    <li><a id="">1000-2000</a></li>
+                    <li><a id="">2000-5000</a></li>
+                    <li><a href="#">>5000</a></li>
+                </ul>
+			</div>
+			<div class='filter' id="category">CATEGORY
+				<ul>
+                    <li><a class="category" id="blazers">Blazers</a>
+                    	<ul>
+		                    <li><a class="subcategory" id="casual">Casual</a></li>
+		                    <li><a class="subcategory" id="formal">Formal</a></li>
+		                </ul>
+                    </li>
+                    <li><a class="category" id="outerwear">Coats And Jackets</a>
+                    	<ul>
+		                    <li><a class="subcategory" id="bomber">Bomber Jackets</a></li>
+		                    <li><a class="subcategory" id="casual">Casual Jackets</a></li>
+		                    <li><a class="subcategory" id="down">Down Jackets</a></li>
+		                    <li><a class="subcategory" id="gilet">Gilet</a></li>
+		                    <li><a class="subcategory" id="leather">Leather Jackets</a></li>
+		                    <li><a class="subcategory" id="overcoat">Overcoat</a></li>
+		                    <li><a class="subcategory" id="parka">Parka</a></li>
+		                    <li><a class="subcategory" id="performance-jackets">Performance Jackets</a></li>
+		                    <li><a class="subcategory" id="raincoat">Trenches And Macs</a></li>
+		                </ul>
+                    </li>
+                    <li><a class="category" id="jeans">Jeans</a>
+                    	<ul>
+		                    <li><a class="subcategory" id="skinny">Skinny</a></li>
+		                    <li><a class="subcategory" id="slim">Slim</a></li>
+		                    <li><a class="subcategory" id="straight">Straight</a></li>
+		                </ul>
+                    </li>
+                    <li><a class="category" id="shirts">Shirts</a>
+                    	<ul>
+		                    <li><a class="subcategory" id="casual">Casual</a></li>
+		                    <li><a class="subcategory" id="fashion">Fashion</a></li>
+		                    <li><a class="subcategory" id="short-sleeve">Short Sleeve</a></li>
+		                    <li><a class="subcategory" id="tie-shirts">Tie Shirts</a></li>
+		                    <li><a class="subcategory" id="tuxedo">Tuxedo</a></li>
+		                </ul>
+                    </li>
+                    <li><a class="category" id="shoes">Shoes</a>
+                    	<ul>
+		                    <li><a class="subcategory" id="boots">Boots</a></li>
+		                    <li><a class="subcategory" id="brogues">Brogues</a></li>
+		                    <li><a class="subcategory" id="derbies">Derbies</a></li>
+		                    <li><a class="subcategory" id="driving-shoes">Driving Shoes</a></li>
+		                    <li><a class="subcategory" id="espadrilles">Espadrilles</a></li>
+		                    <li><a class="subcategory" id="lace-ups">Lace Ups</a></li>
+		                    <li><a class="subcategory" id="loafers">Loafers</a></li>
+		                    <li><a class="subcategory" id="monks">Monks</a></li>
+		                    <li><a class="subcategory" id="sandals">Sandals</a></li>
+		                    <li><a class="subcategory" id="trainers">Trainers</a></li>
+		                </ul>
+                    </li>
+                    <li><a class="category" id="tops">Tops</a>
+                    	<ul>
+		                    <li><a class="subcategory" id="sweatshirts">Sweatshirts</a></li>
+		                    <li><a class="subcategory" id="t-shirts-and-polos">T Shirts And Polos</a></li>
+		                </ul>
+                    </li>
+                    <li><a class="category" id="trousers">Trousers</a>
+                    	<ul>
+		                    <li><a class="subcategory" id="casual">Casual</a></li>
+		                    <li><a class="subcategory" id="chino">Chino</a></li>
+		                    <li><a class="subcategory" id="evening">evening</a></li>
+		                    <li><a class="subcategory" id="tailored">Tailored</a></li>
+		                </ul>
+                    </li>
+                </ul>
+			</div>
+			<div class='filter' id="color">COLOR
+				<ul>
+                    <li><a class="color" id="black">Black</a></li>
+                    <li><a class="color" id="white">White</a></li>
+                    <li><a class="color" id="grey">Grey</a></li>
+                    <li><a class="color" id="print">Print</a></li>
+                    <li><a class="color" id="blue">Blue</a></li>
+                    <li><a class="color" id="green">Green</a></li>
+                    <li><a class="color" id="red">Red</a></li>
+                    <li><a class="color" id="purple">Purple</a></li>
+                    <li><a class="color" id="neutral">Neutral</a></li>
+                    <li><a class="color" id="pink">Pink</a></li>
+                    <li><a class="color" id="yellow">Yellow</a></li>
+                    <li><a class="color" id="orange">Orange</a></li>
+                </ul>
+			</div>
+			<div class='filter' id="designer">DESIGNER
+				<ul>
+                    <li><a class="designer" id="Gucci">Gucci</a></li>
+                    <li><a class="designer" id="Versace">Versace</a></li>
+                    <li><a class="designer" id="Dolce &amp; Gabbana">Dolce &amp; Gabbana</a></li>
+                    <li><a class="designer" id="Polo Ralph Lauren">Polo Ralph Lauren</a></li>
+                    <li><a class="designer" id="Kenzo">Kenzo</a></li>
+                    <li><a class="designer" id="Alexander McQueen">Alexander McQueen</a></li>
+                    <li><a class="designer" id="Y-3">Y-3</a></li>
+                    <li><a class="designer" id="Valentino">Valentino</a></li>
+                </ul>
+            </div>
 		</div>
 	</footer>
 	<script id='cardTemplate' type='text/x-handlebars-template'>
@@ -45,6 +152,8 @@
 		</div>
     </script>
 
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type='text/javascript' src='handlebars-v1.3.0.js'></script>
     <script type='text/javascript' src='fastclick.js'></script>
 	<script type='text/javascript' src='main.js'></script>

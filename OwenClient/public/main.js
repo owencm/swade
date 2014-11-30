@@ -60,6 +60,12 @@ var model = (function () {
         };
 })();
 
+$(document).ready(function(){
+  $( ".filtersContainer a" ).bind( "click", function(event) {
+    console.log($(event.target).attr('class')+"="+event.target.id);
+  });
+});
+
 var view = (function (model) {
   var scrollY = 0;
   // This is the container which contains the cards
