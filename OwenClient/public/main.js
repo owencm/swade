@@ -69,7 +69,7 @@ var view = (function (model) {
   var MODE = {list: 0, detail: 1};
   var mode = MODE.list;
 
-  var changeMode = function (newMode) {
+  var changeMode = function (newMode, userTriggered) {
     var footerElem = document.querySelector('footer');
     var backButtonElem = document.querySelector('#backButton');
     if (newMode == MODE.detail) {
@@ -81,6 +81,10 @@ var view = (function (model) {
       backButtonElem.style.display = '';
       var toastElem = document.querySelector('#toast');
       toastElem.style.opacity = 0;
+      if (userTriggered) {
+        history.pushState({mode: MODE.detail}, 'SWADE');
+        console.log('pushing history');
+      }
     }
     if (newMode == MODE.list) {
       listContainerElem.style.display = '';
@@ -88,6 +92,9 @@ var view = (function (model) {
       detailContainerElem.style.display = 'none';
       backButtonElem.style.display = 'none';
       window.scrollTo(0, scrollY);
+      if (userTriggered) {
+        history.pushState({mode: MODE.list}, 'SWADE');
+      }
     }
     mode = newMode;
   }
@@ -129,7 +136,7 @@ var view = (function (model) {
     var metaContainer = listContainerElem.querySelector('#item'+item.id).querySelector('.metaContainer');
     metaContainer.addEventListener('click', function () {
       model.setSelected(item.id);
-      changeMode(MODE.detail);
+      changeMode(MODE.detail, true);
     });
 
   }
@@ -190,9 +197,21 @@ var view = (function (model) {
 
     var backButtonElem = document.querySelector('#backButton');
     backButtonElem.addEventListener('click', function () {
-      changeMode(MODE.list);
+      changeMode(MODE.list, true);
     });
   }
+
+  window.addEventListener('popstate', function(e) {
+    console.log('User pressed back, popping a state');
+    console.log(e);
+    if (e.state !== null && e.state.mode !== undefined) {
+      console.log('Moving back in history to mode '+e.state.mode);
+      changeMode(e.state.mode, false);
+    } else {
+      // Note safari calls popstate on page load so this is expected
+      console.log('Uh oh, no valid state in history to move back to');
+    }
+  });
 
   var handledScrollRecently = false;
   // Instead of checking and redrawing everything frequently we only do this every 200ms while scrolling
@@ -210,10 +229,11 @@ var view = (function (model) {
   };
   window.addEventListener('scroll', handleScroll);
 
-  window.setTimeout(drawMoreItemsIfNeeded, 300);
   window.setInterval(drawMoreItemsIfNeeded, 1000);
 
   model.addListener(redrawItems);
+
+  changeMode(MODE.list, true);
 
   return {
     changeMode: changeMode
